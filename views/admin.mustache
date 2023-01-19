@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {{>head}}
+        <style>
+            .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 25px;
+            width: 25px;
+            background-color: #bebebe;
+            }
+
+            /* On mouse-over, add a grey background color */
+            .container:hover input ~ .checkmark {
+            background-color: #ccc;
+            }
+
+            /* When the checkbox is checked, add a blue background */
+            .container input:checked ~ .checkmark {
+            background-color: #14274e;
+            }
+
+            /* Create the checkmark/indicator (hidden when not checked) */
+            .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+            }
+
+            /* Show the checkmark when checked */
+            .container input:checked ~ .checkmark:after {
+            display: block;
+            }
+
+            /* Style the checkmark/indicator */
+            .container .checkmark:after {
+            left: 9px;
+            top: 5px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 3px 3px 0;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+            }
+</style>
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        {{>navbar}}
+        <!-- Masthead-->
+        <header class="clienthead">
+            <div class="container">
+                <div class="masthead-heading text-uppercase"></div>
+            </div>
+        </header>
+        <!-- Portfolio Grid-->
+        <section class="page-section bg-light" id="portfolio">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Service Providers List</h2>
+                    {{! <h3 class="section-subheading text-muted">Choose an Event to add to your profile</h3> }}
+                </div>
+                <div class="col-xs-12">
+                    <!-- interactive chart -->
+                    <div class="box box-primary" style="overflow: auto; text-align: center;">
+                        <div class="box-body">
+                            <table class="table table-bordered table-striped blueTable" id = "serviceProvidersTable">
+                                <thead>
+                                    <tr>
+                                        <th>Company Name</th>
+                                        <th>Phone No</th>
+                                        <th>Email</th>
+                                        <th>Address</th>
+                                        <th>Owner Name</th>
+                                        <th>Owner Id No</th>
+                                        <th>Website Link</th>
+                                        <th>Description</th>
+                                        <th>Wedding</th>
+                                        <th>Birthday Party</th>
+                                        <th>Office Party</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                    
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#serviceProviderCreationModal">Add Service Provider</button>
+                    </div>
+                </div>
+                <br/><br/>
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Client List</h2>
+                    {{! <h3 class="section-subheading text-muted">Choose an Event to add to your profile</h3> }}
+                 </div>
+                <div class="col-xs-12">
+                    <!-- interactive chart -->
+                    <div class="box box-primary" style="overflow: auto; text-align: center;">
+                        <div class="box-body">
+                            <table class="table table-bordered table-striped blueTable" id = "clientsTable">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div> 
+            </div> 
+        </section>
+
+        
+<!--  Modal -->
+        <div class="portfolio-modal modal fade" id="serviceProviderCreationModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="close-modal" data-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" /></div>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                            <form id="serviceProviderForm" name="serviceProviders">
+                                <div class="modal-body">
+                                    <!-- Project Details Go Here-->
+                                    <br/>
+                                    <h3 class="text-uppercase">Create Service Provider</h3>
+                                    {{! <p class="item-intro text-muted">Add Your Wedding Events</p> }}
+                                    <br/><br/><br/>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Company Name</span>
+                                        </div>
+                                        <input id="companyName" type="text" class="form-control"  aria-label="Username" aria-describedby="basic-addon1" name="companyName"/>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Phone No</span>
+                                        </div>
+                                        <input id="tel" type="text" class="form-control"  aria-label="Username" aria-describedby="basic-addon1" name="tel" />
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Email</span>
+                                        </div>
+                                        <input id="email" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="email" />
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Address</span>
+                                        </div>
+                                        <input id="address" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="address" />
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Owner Name</span>
+                                        </div>
+                                        <input id="ownerName" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="ownerName" />
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Owner Id No</span>
+                                        </div>
+                                        <input id="ownerIdNo" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="ownerIdNo" />
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Website Link</span>
+                                        </div>
+                                        <input id="websiteLink" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="websiteLink" />
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Description</span>
+                                        </div>
+                                        <input id="description" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="description" />
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="form-check col-sm">
+                                            <input class="form-check-input" type="checkbox" value='YES' id="isWedding" name="isWedding" />
+                                            <label class="form-check-label" for="isWedding">
+                                                Wedding
+                                            </label>
+                                        </div>
+                                        <div class="form-check col-sm">
+                                            <input class="form-check-input" type="checkbox" value='YES' id="isBirthdayParty" name="isBirthdayParty" />
+                                            <label class="form-check-label" for="isBirthdayParty">
+                                                Birthday Party
+                                            </label>
+                                        </div>
+                                        <div class="form-check col-sm">
+                                            <input class="form-check-input" type="checkbox" value='YES' id="isOfficeParty" name="isOfficeParty" />
+                                            <label class="form-check-label" for="isOfficeParty">
+                                                Office Party
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <br/><br/>
+                                    <button class="btn btn-primary"  type="submit" id="serviceProvidersubmitbtn" data-dismiss="modal">
+                                        Create Service Provider
+                                    </button>
+                                </div>
+                            </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{>footer}}
+        {{>imports}}
+        <!-- Core theme JS-->
+        <script src="js/adminscripts.js"></script>
+    </body>
+</html>
